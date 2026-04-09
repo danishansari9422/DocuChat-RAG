@@ -229,7 +229,6 @@ This prompt ensures:
 
 ## Future Enhancements
 
-- Integration with LLM APIs (OpenAI, Anthropic, etc.)
 - Support for multiple document formats (DOCX, TXT, etc.)
 - Advanced chunking strategies
 - Document comparison features
