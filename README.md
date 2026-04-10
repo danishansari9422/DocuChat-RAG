@@ -2,6 +2,14 @@
 
 A Streamlit application for chatting with PDF documents using Retrieval-Augmented Generation (RAG) with Google Gemini LLM integration and comprehensive evaluation system.
 
+## Key Highlights
+
+- End-to-end RAG pipeline with PDF ingestion
+- Context-grounded answers with citations
+- Gemini LLM integration for reasoning-based responses
+- Support for follow-up questions using chat history
+- Built-in evaluation framework with accuracy metrics
+  
 ## Features
 
 - **PDF Upload & Processing**: Upload PDF documents and process them for intelligent querying
@@ -87,6 +95,8 @@ streamlit run app.py
 
 The application will open in your default web browser at `http://localhost:8501`
 
+Note: The storage/ directory is created dynamically at runtime and is excluded from version control.
+
 ## Usage
 
 1. **Upload a PDF**: Use the file uploader in the sidebar to upload a PDF document
@@ -97,6 +107,7 @@ The application will open in your default web browser at `http://localhost:8501`
 6. **Compare Answers**: Review ground truth vs RAG answers side-by-side for manual evaluation
 7. **Mark Results**: Click " Correct" or " Wrong" for each answer to calculate accuracy
 8. **Export Results**: Export evaluation results to CSV for further analysis
+9. **The application maintains chat history using Streamlit session state. Previous user queries and responses are passed to the LLM to enable context-aware follow-up questions and multi-turn conversations.
 
 ## Technical Details
 
@@ -127,9 +138,9 @@ This strategy ensures:
 
 ### Retrieval Strategy
 
-- **Method**: Cosine similarity search
-- **Top-K Results**: 4 documents per query
-- **Vector Store**: ChromaDB with persistent storage
+- **Method**: Cosine similarity enables effective semantic matching between query and document chunks
+- **Top-K retrieval** (k=4) balances context richness and prompt size
+- **Vector Store**: ChromaDB provides efficient local persistence and fast similarity search
 - **Embedding Dimension**: 384 (matching the model)
 
 **Why this strategy works well:**
@@ -148,6 +159,15 @@ The application follows an enhanced RAG pipeline with Gemini LLM integration:
 5. **Retrieval**: Find relevant chunks for user queries
 6. **Generation**: Generate high-quality answers using Google Gemini 2.5 Flash with context and chat history
 7. **Evaluation**: Test RAG performance with predefined questions and manual accuracy calculation
+
+### Evaluation Framework
+
+The application includes a basic evaluation system with predefined questions. 
+Users can manually assess correctness and compute accuracy.
+
+- Number of questions: 5
+- Manual evaluation: Correct / Incorrect
+- Accuracy metric: Correct answers / Total questions
 
 ### Custom Prompt Template
 
